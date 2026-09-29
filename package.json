@@ -1,0 +1,11 @@
+{
+  "name": "battery-backup-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Li-ion battery backup calculator for hybrid solar plants. Static site for Vercel.",
+  "scripts": {
+    "dev": "npx --yes serve public -l 3000",
+    "deploy": "vercel",
+    "deploy:prod": "vercel --prod"
+  }
+}

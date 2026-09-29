@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Li-ion Battery Backup Calculator</title>
+<meta name="description" content="Size the Li-ion battery bank for a hybrid solar plant from the loads you need to run during a grid outage.">
+<meta name="theme-color" content="#12262B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Battery Calc">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="/styles.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+<h1>Li-ion battery backup calculator</h1>
+<p class="sub">Size the battery bank for a hybrid solar plant from the loads you need to run during a grid outage.</p>
+<div class="grid">
+<section class="card">
+<h2>Backup loads</h2>
+<div class="cols head"><span>Appliance</span><span>Watts</span><span>Qty</span><span>Hours</span><span></span></div>
+<div id="rows"></div>
+<button class="add" id="add">Add load</button>
+<div class="set">
+<div><label for="days">Days of autonomy</label><input id="days" type="number" min="0.5" step="0.5" value="1"></div>
+<div><label for="volt">System voltage</label><select id="volt"><option>48</option><option selected>51.2</option><option>96</option><option>102.4</option><option>192</option><option>307.2</option></select></div>
+<div><label for="dod">Depth of discharge (%)</label><input id="dod" type="number" min="50" max="100" value="90"></div>
+<div><label for="inv">Inverter efficiency (%)</label><input id="inv" type="number" min="70" max="99" value="92"></div>
+<div><label for="bat">Battery efficiency (%)</label><input id="bat" type="number" min="80" max="100" value="95"></div>
+<div><label for="mar">Ageing and temperature margin (%)</label><input id="mar" type="number" min="0" max="50" value="10"></div>
+<div><label for="unit">Battery unit (Ah at system voltage)</label><input id="unit" type="number" min="10" value="100"></div>
+<div><label for="psh">Peak sun hours per day</label><input id="psh" type="number" min="2" max="8" step="0.5" value="5"></div>
+</div>
+</section>
+<section>
+<div class="card hero">
+<div class="lbl">Battery capacity needed</div>
+<div class="big" id="kwh">0 kWh</div>
+<div class="bank" id="bank"></div>
+<div class="lbl" id="units"></div>
+<table id="t1"></table>
+</div>
+<div class="card stack">
+<h2>Supporting sizes</h2>
+<table id="t2" class="flush"></table>
+<div id="flags"></div>
+<p class="note">Estimates for planning. Confirm surge loads, cell chemistry limits and maximum discharge current with the battery and inverter datasheets before quoting.</p>
+</div>
+</section>
+</div>
+</div>
+<noscript><p class="wrap">This calculator needs JavaScript enabled.</p></noscript>
+</body>
+</html>
