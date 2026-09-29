@@ -5,6 +5,7 @@
   "description": "Li-ion battery backup calculator for hybrid solar plants. Static site for Vercel.",
   "scripts": {
     "dev": "npx --yes serve public -l 3000",
+    "build:offline": "node scripts/build-offline.js",
     "deploy": "vercel",
     "deploy:prod": "vercel --prod"
   }

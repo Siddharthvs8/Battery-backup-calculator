@@ -1,7 +1,7 @@
 {
   "name": "Battery Backup Calculator",
   "short_name": "Battery Calc",
-  "description": "Size the Li-ion battery bank for a hybrid solar plant from your backup loads.",
+  "description": "Size the Li-ion battery bank, hybrid inverter and solar array for a hybrid solar plant from your backup loads.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
