@@ -9,7 +9,7 @@ The page runs top to bottom, with the three answers (battery bank, hybrid invert
 3. **Hybrid inverter.** The larger of running kVA + 25% or peak starting kVA ÷ surge capacity, rounded up to a standard size.
 4. **Solar array and recharge.** Covers the daytime load and refills the bank within the recharge target. Also shows MPPT current, PV input and recharge time.
 
-Each section has its own Reset button.
+Each section has a Reset button. It asks for confirmation, then clears the load list and every field in all four sections.
 
 ## Project layout
 

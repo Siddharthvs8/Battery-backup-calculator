@@ -17,84 +17,33 @@
 </head>
 <body>
 <div class="wrap">
-<h1>Li-ion battery backup calculator</h1>
-<p class="sub">Size the battery bank, hybrid inverter and solar array for a hybrid solar plant from the loads you need to run during a grid outage.</p>
+<h1>Hybrid solar and battery bank calculator</h1>
+<p class="sub">Enter the loads, then read the battery bank, inverter and solar array you need.</p>
+<div class="card hero sum"><div><div class="lbl">Battery bank</div><div class="big" id="sBat">0</div><div class="lbl" id="sBatSub"></div></div><div><div class="lbl">Hybrid inverter</div><div class="big" id="sInv">0</div><div class="lbl" id="sInvSub"></div></div><div><div class="lbl">Solar array</div><div class="big" id="sPV">0</div><div class="lbl" id="sPVSub"></div></div></div>
 
-<nav class="summary" aria-label="Results">
-<div class="tiles">
-<a class="tile" href="#battery"><span class="k">Battery bank</span><b id="sBat">–</b><span class="s" id="sBatSub"></span></a>
-<a class="tile" href="#inverter"><span class="k">Hybrid inverter</span><b id="sInv">–</b><span class="s" id="sInvSub"></span></a>
-<a class="tile" href="#solar"><span class="k">Solar array</span><b id="sPv">–</b><span class="s" id="sPvSub"></span></a>
-</div>
-</nav>
+<section class="card sec"><div class="sh"><h2>1. Loads</h2><button class="rs" data-reset="loads" aria-label="Reset Loads">Reset</button></div>
+<div class="seg"><button data-lm="det" class="on">Add loads individually</button><button data-lm="tot">Enter total loads</button></div>
+<div id="rows"></div><div id="totals" hidden></div>
+<div class="hp"><b>Motor HP to watts</b>
+<div class="f"><div><label for="hp">HP</label><input id="hp" type="number" step="any" value="1"></div><div><label for="he">Motor efficiency %</label><input id="he" type="number" value="75"></div><div><label for="hf">Power factor</label><input id="hf" type="number" step="0.05" value="0.75"></div></div>
+<div class="note" id="hpout" style="margin-top:6px"></div></div>
+<table id="t0"></table>
+<p class="note">Start × is starting current over running current. Typical: fans 2, capacitor-start pumps 4 to 5, fridge and compressors 5 to 6, submersibles 6, DOL three-phase motors 6, star-delta 2 to 3, soft starter or VFD 1.5 to 2.</p></section>
 
-<form class="card sec" id="loads" novalidate>
-<div class="sec-head"><h2><span class="no">1</span>Loads</h2><button type="reset">Reset</button></div>
-<div class="seg" role="radiogroup" aria-label="How to enter loads">
-<label><input type="radio" name="mode" value="each" checked><span>Add loads individually</span></label>
-<label><input type="radio" name="mode" value="total"><span>Enter total loads</span></label>
-</div>
-<div id="groups"></div>
-<details class="helper">
-<summary>HP to watts helper</summary>
-<div class="set">
-<div><label for="hp">Motor rating (HP)</label><input id="hp" type="number" inputmode="decimal" min="0.1" step="any" value="1"></div>
-<div><label for="hpEff">Motor efficiency (%)</label><input id="hpEff" type="number" inputmode="decimal" min="30" max="100" value="75"></div>
-<div><label for="hpPf">Power factor</label><input id="hpPf" type="number" inputmode="decimal" min="0.1" max="1" step="0.01" value="0.8"></div>
-</div>
-<table id="tHp"></table>
-<button type="button" class="add" id="hpAdd">Add to motor loads</button>
-</details>
-<h3 class="tbl-h">Load summary</h3>
-<table id="tLoad"></table>
-<div id="fLoad"></div>
-</form>
+<section class="card sec"><div class="sh"><h2>2. Battery bank</h2><button class="rs" data-reset="bat" aria-label="Reset Battery bank">Reset</button></div>
+<div class="set"><div><label for="days">Days of autonomy</label><input id="days" type="number" step="any" value="1" min="0.5" step="0.5"></div><div><label for="volt">System voltage</label><select id="volt"><option>48</option><option selected>51.2</option><option>96</option><option>102.4</option><option>192</option><option>307.2</option></select></div><div><label for="unit">Battery unit (Ah at system voltage)</label><input id="unit" type="number" step="any" value="100"></div><div><label for="dod">Depth of discharge %</label><input id="dod" type="number" step="any" value="90"></div><div><label for="bat">Battery efficiency %</label><input id="bat" type="number" step="any" value="95"></div><div><label for="mar">Ageing and temperature margin %</label><input id="mar" type="number" step="any" value="10"></div><div><label for="cc">Max continuous discharge (C)</label><input id="cc" type="number" step="any" value="0.5"></div><div><label for="pc">Max peak discharge (C)</label><input id="pc" type="number" step="any" value="1"></div></div>
+<div class="big" id="kwh">0 kWh</div><div class="bank" id="bank"></div><div class="note" id="units" style="margin-top:0"></div>
+<table id="t1"></table><div id="flags"></div></section>
 
-<form class="card sec" id="battery" novalidate>
-<div class="sec-head"><h2><span class="no">2</span>Battery bank</h2><button type="reset">Reset</button></div>
-<div class="set">
-<div><label for="days">Days of autonomy</label><input id="days" type="number" inputmode="decimal" min="0.5" max="10" step="0.5" value="1"></div>
-<div><label for="volt">System voltage (V)</label><select id="volt"><option>48</option><option selected>51.2</option><option>96</option><option>102.4</option><option>192</option><option>307.2</option></select></div>
-<div><label for="unit">Battery unit (Ah at system voltage)</label><input id="unit" type="number" inputmode="decimal" min="1" step="any" value="100"></div>
-<div><label for="dod">Depth of discharge (%)</label><input id="dod" type="number" inputmode="decimal" min="10" max="100" value="90"></div>
-<div><label for="bat">Battery efficiency (%)</label><input id="bat" type="number" inputmode="decimal" min="50" max="100" value="95"></div>
-<div><label for="mar">Ageing and temperature margin (%)</label><input id="mar" type="number" inputmode="decimal" min="0" max="100" value="10"></div>
-<div><label for="cc">Max continuous discharge (C)</label><input id="cc" type="number" inputmode="decimal" min="0.05" max="5" step="0.05" value="0.5"></div>
-<div><label for="cp">Max peak discharge (C)</label><input id="cp" type="number" inputmode="decimal" min="0.05" max="10" step="0.05" value="1"></div>
-</div>
-<div class="bank" id="bank" aria-hidden="true"></div>
-<table id="tBat"></table>
-<div id="fBat"></div>
-</form>
+<section class="card sec"><div class="sh"><h2>3. Hybrid inverter</h2><button class="rs" data-reset="inv" aria-label="Reset Hybrid inverter">Reset</button></div>
+<div class="set"><div><label for="inv">Inverter efficiency %</label><input id="inv" type="number" step="any" value="92"></div><div><label for="sc">Inverter surge capacity (× rating)</label><input id="sc" type="number" step="any" value="2"></div><div><label for="mode">Motor starting</label><select id="mode"><option value="seq">One at a time</option><option value="all">All together</option></select></div></div>
+<table id="t2"></table></section>
 
-<form class="card sec" id="inverter" novalidate>
-<div class="sec-head"><h2><span class="no">3</span>Hybrid inverter</h2><button type="reset">Reset</button></div>
-<div class="set">
-<div><label for="inv">Inverter efficiency (%)</label><input id="inv" type="number" inputmode="decimal" min="50" max="100" value="92"></div>
-<div><label for="surge">Surge capacity (× rating)</label><input id="surge" type="number" inputmode="decimal" min="1" max="5" step="0.1" value="2"></div>
-<div class="wide"><label for="start">Motor starting</label><select id="start"><option value="one" selected>One motor at a time</option><option value="all">All motors together</option></select></div>
+<section class="card sec"><div class="sh"><h2>4. Solar array and recharge</h2><button class="rs" data-reset="sol" aria-label="Reset Solar array and recharge">Reset</button></div>
+<div class="set"><div><label for="psh">Peak sun hours per day</label><input id="psh" type="number" step="any" value="5" step="0.5"></div><div><label for="pw">Solar panel (Wp)</label><input id="pw" type="number" step="any" value="550"></div><div><label for="dayp">Daytime share of load %</label><input id="dayp" type="number" step="any" value="40"></div><div><label for="pr">Performance ratio %</label><input id="pr" type="number" step="any" value="75"></div><div><label for="rd">Recharge target (days)</label><input id="rd" type="number" step="any" value="1" step="0.5"></div><div><label for="chc">Max battery charge (C)</label><input id="chc" type="number" step="any" value="0.5"></div></div>
+<table id="t3"></table><div id="sflags"></div>
+<p class="note">Solar feeds the daytime load directly and recharges the battery with the surplus. The array is sized to refill the full backup energy within the recharge target. Confirm ratings against datasheets before quoting.</p></section>
 </div>
-<table id="tInv"></table>
-<div id="fInv"></div>
-</form>
-
-<form class="card sec" id="solar" novalidate>
-<div class="sec-head"><h2><span class="no">4</span>Solar array and recharge</h2><button type="reset">Reset</button></div>
-<div class="set">
-<div><label for="psh">Peak sun hours per day</label><input id="psh" type="number" inputmode="decimal" min="1" max="10" step="0.1" value="5"></div>
-<div><label for="wp">Solar panel (Wp)</label><input id="wp" type="number" inputmode="decimal" min="10" step="5" value="550"></div>
-<div><label for="day">Daytime share of load (%)</label><input id="day" type="number" inputmode="decimal" min="0" max="100" value="40"></div>
-<div><label for="pr">Performance ratio (%)</label><input id="pr" type="number" inputmode="decimal" min="30" max="100" value="75"></div>
-<div><label for="rt">Recharge target (days)</label><input id="rt" type="number" inputmode="decimal" min="0.5" step="0.5" value="1"></div>
-<div><label for="chg">Max battery charge (C)</label><input id="chg" type="number" inputmode="decimal" min="0.05" max="5" step="0.05" value="0.5"></div>
-</div>
-<table id="tPv"></table>
-<div id="fPv"></div>
-<p class="note">The array feeds the daytime share of the load directly and refills the bank from empty within the recharge target, with the grid or a generator carrying the night load meanwhile. Cloudy days aren't modelled: lower the performance ratio or raise the recharge target to allow for them.</p>
-</form>
-
-<p class="note">Estimates for planning. Preset watts, power factor and Start × values are typical figures, so use nameplate values where you have them. Confirm surge ratings, cell chemistry limits and maximum charge and discharge currents with the battery and inverter datasheets before quoting.</p>
-</div>
-<noscript><p class="wrap">This calculator needs JavaScript enabled.</p></noscript>
+<div class="ov" id="cf" hidden role="dialog" aria-modal="true"><div class="card"><b>Reset everything?</b><p>This clears the load list and every entry in all sections: loads, battery bank, hybrid inverter and solar. It cannot be undone.</p><div class="row"><button id="cfn">Cancel</button><button id="cfy">Reset all</button></div></div></div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 // Offline support: precache the app shell, serve pages network-first and
 // static assets stale-while-revalidate. Bump VERSION to force a clean cache.
-var VERSION = "v2";
+var VERSION = "v3";
 var CACHE = "battery-calc-" + VERSION;
 var SHELL = [
   "/",

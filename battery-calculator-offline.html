@@ -13,532 +13,190 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%2312262B%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2234%22%20width%3D%2244%22%20height%3D%2234%22%20rx%3D%225%22%20fill%3D%22%23E8A317%22%2F%3E%3Crect%20x%3D%2270%22%20y%3D%2245%22%20width%3D%226%22%20height%3D%2212%22%20fill%3D%22%23E8A317%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%2312262B%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2234%22%20width%3D%2244%22%20height%3D%2234%22%20rx%3D%225%22%20fill%3D%22%23E8A317%22%2F%3E%3Crect%20x%3D%2270%22%20y%3D%2245%22%20width%3D%226%22%20height%3D%2212%22%20fill%3D%22%23E8A317%22%2F%3E%3C%2Fsvg%3E">
 <style>
-:root{--bg:#F1F4F0;--card:#FFFFFF;--ink:#12262B;--mute:#5B6E6C;--line:#D6DED8;--acc:#E8A317;--good:#1F8A70;--warn:#C8452F;--soft:#E7EEE9;--bar:#12262B;--bar-ink:#F1F4F0;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A1D;--card:#16262A;--ink:#E8EFEA;--mute:#93A8A5;--line:#284046;--soft:#1D3237;--bar:#1D3237}}
-:root[data-theme="dark"]{--bg:#0F1A1D;--card:#16262A;--ink:#E8EFEA;--mute:#93A8A5;--line:#284046;--soft:#1D3237;--bar:#1D3237}
-html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg);scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:root{--bg:#F1F4F0;--card:#FFFFFF;--ink:#12262B;--mute:#5B6E6C;--line:#D6DED8;--acc:#E8A317;--good:#1F8A70;--warn:#C8452F;--soft:#E7EEE9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A1D;--card:#16262A;--ink:#E8EFEA;--mute:#93A8A5;--line:#284046;--soft:#1D3237}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:20px 16px 40px}
-h1,h2,h3{font-family:"Avenir Next","Trebuchet MS",system-ui,sans-serif;margin:0}
-h1{font-size:clamp(26px,5vw,38px);line-height:1.1;font-weight:700}
-h2{font-size:18px}
-h3{font-size:15px}
-.sub{color:var(--mute);margin:6px 0 12px;max-width:60ch}
-.summary{position:sticky;top:0;z-index:5;margin:0 -16px;padding:8px 16px;background:var(--bg)}
-.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--bar);color:var(--bar-ink);border-radius:12px;overflow:hidden}
-.tile{display:block;padding:10px;color:inherit;text-decoration:none;min-width:0}
-.tile+.tile{border-left:1px solid rgba(255,255,255,.14)}
-.tile .k{display:block;font-size:11px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tile b{display:block;font-family:"Avenir Next","Trebuchet MS",system-ui,sans-serif;font-size:clamp(17px,4.6vw,24px);line-height:1.2;color:var(--acc);font-variant-numeric:tabular-nums}
-.tile .s{display:block;font-size:11px;opacity:.85;margin-top:2px}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 40px}
+h1,h2{font-family:"Avenir Next","Trebuchet MS",system-ui,sans-serif;margin:0}
+h1{font-size:clamp(26px,5vw,38px);line-height:1.1}
+.sub{color:var(--mute);margin:6px 0 20px;max-width:58ch}
+.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:start}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
-.sec{margin-top:8px;scroll-margin-top:100px}
-.sec+.sec{margin-top:16px}
-.sec-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
-.sec-head h2{display:flex;align-items:center;gap:8px}
-.sec-head button{padding:6px 12px;font-size:13px}
-.no{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--acc);color:#12262B;font-size:13px}
+h2{font-size:18px;margin-bottom:12px}
 input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
 input:focus,select:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
-[aria-invalid="true"]{border-color:var(--warn)}
 button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:8px 12px}
-button.x{padding:6px 0;color:var(--warn)}
-.add{margin-top:10px;font-weight:600}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--soft);border-radius:10px}
-.seg label{position:relative}
-.seg input{position:absolute;inset:0;height:100%;margin:0;opacity:0;cursor:pointer}
-.seg span{display:block;height:100%;text-align:center;padding:8px 6px;border-radius:7px;font-size:14px;font-weight:600;color:var(--mute)}
-.seg input:checked+span{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.15)}
-.seg input:focus-visible+span{outline:2px solid var(--acc);outline-offset:1px}
-.grp{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
-.grp-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
-.tot{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums;text-align:right}
-.load{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) 32px;gap:4px 6px;align-items:end;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
-.load .nm{grid-column:1/6;grid-row:1}
-.load .x{grid-column:6;grid-row:1}
-.load .f span{display:block;font-size:11px;color:var(--mute);margin-bottom:2px}
-.load .f input{padding:7px 6px}
-@media(min-width:600px){.load{grid-template-columns:minmax(0,2.2fr) repeat(5,minmax(0,1fr)) 32px}.load .nm{grid-column:1}.load .x{grid-column:7}}
-.pick{background:var(--soft);font-weight:600}
-.empty{color:var(--mute);font-size:13px;margin:0 0 8px}
-.hint{font-size:12px;color:var(--mute);margin:8px 0 0}
-.set{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.set label{display:block;font-size:12px;color:var(--mute);margin-bottom:3px}
-.set .wide{grid-column:1/-1}
-details.helper{margin-top:16px;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-details.helper summary{cursor:pointer;font-weight:600}
-details.helper .set{margin-top:10px}
-.tbl-h{margin-top:18px}
-.bank{display:flex;gap:3px;margin:16px 0 0;flex-wrap:wrap}
-.bank i{width:18px;height:28px;border-radius:4px;background:var(--acc);display:block}
-.bank i:nth-child(n+41){display:none}
+button.x{width:40px;flex:none;color:var(--warn);padding:6px 0}
+.ld{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px}
+.ld .top{display:flex;gap:6px;margin-bottom:6px}
+.ld .f{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+label{display:block;font-size:11px;color:var(--mute);margin-bottom:2px}
+.set{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.hp{margin-top:14px;padding:10px;border-radius:8px;background:var(--soft)}
+.hp .f{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.hero{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.big{font-family:"Avenir Next","Trebuchet MS",sans-serif;font-size:clamp(40px,9vw,60px);font-weight:700;line-height:1;color:var(--acc)}
+.lbl{opacity:.8;font-size:14px}
+.bank{display:flex;gap:3px;margin:14px 0 4px;flex-wrap:wrap}
+.bank i{width:22px;height:34px;border-radius:4px;background:var(--acc);display:block}
+.bank i:nth-child(n+25){display:none}
 table{width:100%;border-collapse:collapse;margin-top:12px}
-td{padding:8px 0;border-top:1px solid var(--line);vertical-align:top}
-td:first-child{padding-right:12px}
+td{padding:8px 0;border-top:1px solid var(--line)}
 td:last-child{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
-tr.hi td:first-child{box-shadow:inset 3px 0 var(--acc);padding-left:8px}
-tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.hero td{border-color:rgba(255,255,255,.18)}
 .note{font-size:13px;color:var(--mute);margin-top:12px}
-.flag{margin-top:12px;padding:10px;border-radius:8px;background:var(--soft);font-size:13px}
-.flag.w{border-left:4px solid var(--warn)}
-.flag.g{border-left:4px solid var(--good)}
+.flag{margin-top:12px;padding:10px;border-radius:8px;background:var(--soft);font-size:13px;border-left:4px solid var(--good)}
+.flag.w{border-left-color:var(--warn)}
+.cat{margin-bottom:16px}.ch{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:2px solid var(--acc);margin-bottom:4px;padding-bottom:4px}.ch h3{margin:0;font-size:16px}.ch span{font-size:12px;color:var(--mute);text-align:right}.ca{display:flex;gap:6px}.ca select{flex:1}
+.seg{display:flex;gap:6px;margin-bottom:12px}.seg button{flex:1}.seg button.on{background:var(--acc);color:#12262B;border-color:var(--acc);font-weight:600}.f3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}
+.sec{margin-top:16px}.sec table{margin-top:14px}.sec .big{font-size:32px;color:var(--ink);margin-top:16px}.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}.sum .big{font-size:clamp(20px,6vw,32px);margin:2px 0;color:var(--acc)}.sum .lbl{font-size:12px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sh h2{margin:0}.rs{padding:4px 12px;font-size:13px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}.ov[hidden]{display:none}.ov .card{max-width:340px}.ov p{margin:8px 0 14px}.ov .row{display:flex;gap:8px;justify-content:flex-end}.ov #cfy{background:var(--warn);color:#fff;border-color:var(--warn)}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>Li-ion battery backup calculator</h1>
-<p class="sub">Size the battery bank, hybrid inverter and solar array for a hybrid solar plant from the loads you need to run during a grid outage.</p>
+<h1>Hybrid solar and battery bank calculator</h1>
+<p class="sub">Enter the loads, then read the battery bank, inverter and solar array you need.</p>
+<div class="card hero sum"><div><div class="lbl">Battery bank</div><div class="big" id="sBat">0</div><div class="lbl" id="sBatSub"></div></div><div><div class="lbl">Hybrid inverter</div><div class="big" id="sInv">0</div><div class="lbl" id="sInvSub"></div></div><div><div class="lbl">Solar array</div><div class="big" id="sPV">0</div><div class="lbl" id="sPVSub"></div></div></div>
 
-<nav class="summary" aria-label="Results">
-<div class="tiles">
-<a class="tile" href="#battery"><span class="k">Battery bank</span><b id="sBat">–</b><span class="s" id="sBatSub"></span></a>
-<a class="tile" href="#inverter"><span class="k">Hybrid inverter</span><b id="sInv">–</b><span class="s" id="sInvSub"></span></a>
-<a class="tile" href="#solar"><span class="k">Solar array</span><b id="sPv">–</b><span class="s" id="sPvSub"></span></a>
-</div>
-</nav>
+<section class="card sec"><div class="sh"><h2>1. Loads</h2><button class="rs" data-reset="loads" aria-label="Reset Loads">Reset</button></div>
+<div class="seg"><button data-lm="det" class="on">Add loads individually</button><button data-lm="tot">Enter total loads</button></div>
+<div id="rows"></div><div id="totals" hidden></div>
+<div class="hp"><b>Motor HP to watts</b>
+<div class="f"><div><label for="hp">HP</label><input id="hp" type="number" step="any" value="1"></div><div><label for="he">Motor efficiency %</label><input id="he" type="number" value="75"></div><div><label for="hf">Power factor</label><input id="hf" type="number" step="0.05" value="0.75"></div></div>
+<div class="note" id="hpout" style="margin-top:6px"></div></div>
+<table id="t0"></table>
+<p class="note">Start × is starting current over running current. Typical: fans 2, capacitor-start pumps 4 to 5, fridge and compressors 5 to 6, submersibles 6, DOL three-phase motors 6, star-delta 2 to 3, soft starter or VFD 1.5 to 2.</p></section>
 
-<form class="card sec" id="loads" novalidate>
-<div class="sec-head"><h2><span class="no">1</span>Loads</h2><button type="reset">Reset</button></div>
-<div class="seg" role="radiogroup" aria-label="How to enter loads">
-<label><input type="radio" name="mode" value="each" checked><span>Add loads individually</span></label>
-<label><input type="radio" name="mode" value="total"><span>Enter total loads</span></label>
-</div>
-<div id="groups"></div>
-<details class="helper">
-<summary>HP to watts helper</summary>
-<div class="set">
-<div><label for="hp">Motor rating (HP)</label><input id="hp" type="number" inputmode="decimal" min="0.1" step="any" value="1"></div>
-<div><label for="hpEff">Motor efficiency (%)</label><input id="hpEff" type="number" inputmode="decimal" min="30" max="100" value="75"></div>
-<div><label for="hpPf">Power factor</label><input id="hpPf" type="number" inputmode="decimal" min="0.1" max="1" step="0.01" value="0.8"></div>
-</div>
-<table id="tHp"></table>
-<button type="button" class="add" id="hpAdd">Add to motor loads</button>
-</details>
-<h3 class="tbl-h">Load summary</h3>
-<table id="tLoad"></table>
-<div id="fLoad"></div>
-</form>
+<section class="card sec"><div class="sh"><h2>2. Battery bank</h2><button class="rs" data-reset="bat" aria-label="Reset Battery bank">Reset</button></div>
+<div class="set"><div><label for="days">Days of autonomy</label><input id="days" type="number" step="any" value="1" min="0.5" step="0.5"></div><div><label for="volt">System voltage</label><select id="volt"><option>48</option><option selected>51.2</option><option>96</option><option>102.4</option><option>192</option><option>307.2</option></select></div><div><label for="unit">Battery unit (Ah at system voltage)</label><input id="unit" type="number" step="any" value="100"></div><div><label for="dod">Depth of discharge %</label><input id="dod" type="number" step="any" value="90"></div><div><label for="bat">Battery efficiency %</label><input id="bat" type="number" step="any" value="95"></div><div><label for="mar">Ageing and temperature margin %</label><input id="mar" type="number" step="any" value="10"></div><div><label for="cc">Max continuous discharge (C)</label><input id="cc" type="number" step="any" value="0.5"></div><div><label for="pc">Max peak discharge (C)</label><input id="pc" type="number" step="any" value="1"></div></div>
+<div class="big" id="kwh">0 kWh</div><div class="bank" id="bank"></div><div class="note" id="units" style="margin-top:0"></div>
+<table id="t1"></table><div id="flags"></div></section>
 
-<form class="card sec" id="battery" novalidate>
-<div class="sec-head"><h2><span class="no">2</span>Battery bank</h2><button type="reset">Reset</button></div>
-<div class="set">
-<div><label for="days">Days of autonomy</label><input id="days" type="number" inputmode="decimal" min="0.5" max="10" step="0.5" value="1"></div>
-<div><label for="volt">System voltage (V)</label><select id="volt"><option>48</option><option selected>51.2</option><option>96</option><option>102.4</option><option>192</option><option>307.2</option></select></div>
-<div><label for="unit">Battery unit (Ah at system voltage)</label><input id="unit" type="number" inputmode="decimal" min="1" step="any" value="100"></div>
-<div><label for="dod">Depth of discharge (%)</label><input id="dod" type="number" inputmode="decimal" min="10" max="100" value="90"></div>
-<div><label for="bat">Battery efficiency (%)</label><input id="bat" type="number" inputmode="decimal" min="50" max="100" value="95"></div>
-<div><label for="mar">Ageing and temperature margin (%)</label><input id="mar" type="number" inputmode="decimal" min="0" max="100" value="10"></div>
-<div><label for="cc">Max continuous discharge (C)</label><input id="cc" type="number" inputmode="decimal" min="0.05" max="5" step="0.05" value="0.5"></div>
-<div><label for="cp">Max peak discharge (C)</label><input id="cp" type="number" inputmode="decimal" min="0.05" max="10" step="0.05" value="1"></div>
-</div>
-<div class="bank" id="bank" aria-hidden="true"></div>
-<table id="tBat"></table>
-<div id="fBat"></div>
-</form>
+<section class="card sec"><div class="sh"><h2>3. Hybrid inverter</h2><button class="rs" data-reset="inv" aria-label="Reset Hybrid inverter">Reset</button></div>
+<div class="set"><div><label for="inv">Inverter efficiency %</label><input id="inv" type="number" step="any" value="92"></div><div><label for="sc">Inverter surge capacity (× rating)</label><input id="sc" type="number" step="any" value="2"></div><div><label for="mode">Motor starting</label><select id="mode"><option value="seq">One at a time</option><option value="all">All together</option></select></div></div>
+<table id="t2"></table></section>
 
-<form class="card sec" id="inverter" novalidate>
-<div class="sec-head"><h2><span class="no">3</span>Hybrid inverter</h2><button type="reset">Reset</button></div>
-<div class="set">
-<div><label for="inv">Inverter efficiency (%)</label><input id="inv" type="number" inputmode="decimal" min="50" max="100" value="92"></div>
-<div><label for="surge">Surge capacity (× rating)</label><input id="surge" type="number" inputmode="decimal" min="1" max="5" step="0.1" value="2"></div>
-<div class="wide"><label for="start">Motor starting</label><select id="start"><option value="one" selected>One motor at a time</option><option value="all">All motors together</option></select></div>
+<section class="card sec"><div class="sh"><h2>4. Solar array and recharge</h2><button class="rs" data-reset="sol" aria-label="Reset Solar array and recharge">Reset</button></div>
+<div class="set"><div><label for="psh">Peak sun hours per day</label><input id="psh" type="number" step="any" value="5" step="0.5"></div><div><label for="pw">Solar panel (Wp)</label><input id="pw" type="number" step="any" value="550"></div><div><label for="dayp">Daytime share of load %</label><input id="dayp" type="number" step="any" value="40"></div><div><label for="pr">Performance ratio %</label><input id="pr" type="number" step="any" value="75"></div><div><label for="rd">Recharge target (days)</label><input id="rd" type="number" step="any" value="1" step="0.5"></div><div><label for="chc">Max battery charge (C)</label><input id="chc" type="number" step="any" value="0.5"></div></div>
+<table id="t3"></table><div id="sflags"></div>
+<p class="note">Solar feeds the daytime load directly and recharges the battery with the surplus. The array is sized to refill the full backup energy within the recharge target. Confirm ratings against datasheets before quoting.</p></section>
 </div>
-<table id="tInv"></table>
-<div id="fInv"></div>
-</form>
-
-<form class="card sec" id="solar" novalidate>
-<div class="sec-head"><h2><span class="no">4</span>Solar array and recharge</h2><button type="reset">Reset</button></div>
-<div class="set">
-<div><label for="psh">Peak sun hours per day</label><input id="psh" type="number" inputmode="decimal" min="1" max="10" step="0.1" value="5"></div>
-<div><label for="wp">Solar panel (Wp)</label><input id="wp" type="number" inputmode="decimal" min="10" step="5" value="550"></div>
-<div><label for="day">Daytime share of load (%)</label><input id="day" type="number" inputmode="decimal" min="0" max="100" value="40"></div>
-<div><label for="pr">Performance ratio (%)</label><input id="pr" type="number" inputmode="decimal" min="30" max="100" value="75"></div>
-<div><label for="rt">Recharge target (days)</label><input id="rt" type="number" inputmode="decimal" min="0.5" step="0.5" value="1"></div>
-<div><label for="chg">Max battery charge (C)</label><input id="chg" type="number" inputmode="decimal" min="0.05" max="5" step="0.05" value="0.5"></div>
-</div>
-<table id="tPv"></table>
-<div id="fPv"></div>
-<p class="note">The array feeds the daytime share of the load directly and refills the bank from empty within the recharge target, with the grid or a generator carrying the night load meanwhile. Cloudy days aren't modelled: lower the performance ratio or raise the recharge target to allow for them.</p>
-</form>
-
-<p class="note">Estimates for planning. Preset watts, power factor and Start × values are typical figures, so use nameplate values where you have them. Confirm surge ratings, cell chemistry limits and maximum charge and discharge currents with the battery and inverter datasheets before quoting.</p>
-</div>
-<noscript><p class="wrap">This calculator needs JavaScript enabled.</p></noscript>
+<div class="ov" id="cf" hidden role="dialog" aria-modal="true"><div class="card"><b>Reset everything?</b><p>This clears the load list and every entry in all sections: loads, battery bank, hybrid inverter and solar. It cannot be undone.</p><div class="row"><button id="cfn">Cancel</button><button id="cfy">Reset all</button></div></div></div>
 <script>
-// Hybrid solar + Li-ion battery sizing. Loads come either from an itemised list
-// (light / motor / power groups) or from group totals; the battery, inverter and
-// solar sections all size off whichever mode is selected.
-
-var GROUPS = [["light", "Light loads", "light load"], ["motor", "Motor loads", "motor load"], ["power", "Power loads", "power load"]];
-
-// [name, running watts, power factor, Start × (starting / running current), hours per day]
-var PRESETS = {
-  light: [
-    ["LED bulb", 9, 0.9, 1, 6],
-    ["LED tube light", 20, 0.95, 1, 6],
-    ["LED TV", 100, 0.9, 1, 5],
-    ["Laptop", 65, 0.9, 1, 6],
-    ["Desktop computer", 200, 0.95, 1, 6],
-    ["Wi-Fi router", 15, 0.9, 1, 24],
-    ["CCTV (4 cameras + DVR)", 60, 0.9, 1, 24],
-    ["Set-top box", 20, 0.9, 1, 5],
-    ["Phone charger", 10, 0.9, 1, 3]
-  ],
-  motor: [
-    ["Ceiling fan", 75, 0.9, 2, 8],
-    ["BLDC ceiling fan", 30, 0.95, 1, 8],
-    ["Table / pedestal fan", 55, 0.9, 2, 6],
-    ["Exhaust fan", 40, 0.85, 2, 4],
-    ["Air cooler", 200, 0.85, 3, 8],
-    ["Refrigerator (single door)", 150, 0.8, 6, 10],
-    ["Refrigerator (double door)", 250, 0.8, 6, 10],
-    ["Inverter refrigerator", 120, 0.95, 1.5, 12],
-    ["Deep freezer", 300, 0.8, 6, 12],
-    ["Washing machine", 500, 0.8, 3, 1],
-    ["Mixer grinder", 750, 0.85, 3, 0.5],
-    ["RO water purifier", 60, 0.8, 3, 2],
-    ["Water pump 0.5 HP", 560, 0.8, 6, 1],
-    ["Water pump 1 HP", 1000, 0.8, 6, 1],
-    ["Water pump 1.5 HP", 1450, 0.8, 6, 1],
-    ["Water pump 2 HP", 1900, 0.82, 6, 1],
-    ["Borewell submersible 1 HP", 1250, 0.8, 7, 1],
-    ["Borewell submersible 1.5 HP", 1800, 0.8, 7, 1],
-    ["Borewell submersible 2 HP", 2300, 0.82, 7, 1],
-    ["AC 1 ton (fixed speed)", 1100, 0.9, 5, 6],
-    ["AC 1.5 ton (fixed speed)", 1600, 0.9, 5, 6],
-    ["AC 2 ton (fixed speed)", 2100, 0.9, 5, 6],
-    ["Inverter AC 1 ton", 900, 0.95, 1.5, 6],
-    ["Inverter AC 1.5 ton", 1300, 0.95, 1.5, 6],
-    ["Air compressor 2 HP", 1900, 0.8, 6, 1],
-    ["3-phase motor 3 HP", 2600, 0.85, 6, 2],
-    ["3-phase motor 5 HP", 4300, 0.85, 6, 2],
-    ["3-phase motor 7.5 HP", 6400, 0.86, 6, 2]
-  ],
-  power: [
-    ["Water heater (geyser)", 2000, 1, 1, 1],
-    ["Electric iron", 1000, 1, 1, 0.5],
-    ["Electric kettle", 1500, 1, 1, 0.25],
-    ["Microwave oven", 1200, 0.95, 2, 0.5],
-    ["Induction cooktop", 2000, 0.98, 1, 1],
-    ["Room heater", 2000, 1, 1, 4],
-    ["OTG oven", 1500, 1, 1, 0.5],
-    ["Toaster", 800, 1, 1, 0.25],
-    ["Rice cooker", 700, 1, 1, 1],
-    ["Hair dryer", 1200, 1, 1, 0.25],
-    ["EV charger 3.3 kW", 3300, 0.99, 1, 3],
-    ["EV charger 7.4 kW", 7400, 0.99, 1, 2]
-  ]
-};
-var CUSTOM = { light: ["Custom light load", 20, 0.9, 1, 4], motor: ["Custom motor load", 500, 0.8, 5, 2], power: ["Custom power load", 1000, 1, 1, 1] };
-var FIELDS = [["w", "Watts"], ["q", "Qty"], ["h", "h/day"], ["pf", "PF"], ["st", "Start ×"]];
-var TOTAL_FIELDS = [["w", "Total running watts"], ["h", "Average hours per day"], ["pf", "Power factor"]];
-var BIG_MOTOR_FIELDS = [["bw", "Largest motor (W)"], ["bst", "Largest motor Start ×"]];
-var STD_KVA = [1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7.5, 8, 10, 12, 15, 20, 25, 30, 40, 50, 60, 75, 100];
-var INV_MARGIN = 1.25, MPPT_MARGIN = 1.25, DC_AC_RATIO = 1.2, M2_PER_KWP = 5, W_PER_HP = 746;
-
-function load(g, p, q, h) {
-  return { g: g, name: p[0], w: p[1], q: q, h: h == null ? p[4] : h, pf: p[2], st: p[3], p3: /^3-phase/.test(p[0]) };
+var LIB={L:[["LED bulb",10,.9,1],["LED tube light",20,.9,1],["Wi-Fi router",15,.9,1],["TV",100,.9,1],["Laptop",65,.9,1],["Desktop computer",200,.9,1],["CCTV and DVR",50,.9,1],["Phone charger",10,.7,1],["Custom light load",100,.9,1]],
+M:[["Ceiling fan",75,.8,2],["BLDC fan",35,.9,1.5],["Air cooler",200,.75,2.5],["Mixer grinder",500,.75,3],["Washing machine",500,.7,3],["Refrigerator",200,.7,5],["Deep freezer",250,.7,6],["Water pump 0.5 HP",550,.75,4],["Water pump 1 HP",1000,.75,4.5],["Water pump 1.5 HP",1400,.75,5],["Borewell submersible 1 HP",1000,.7,6],["Borewell submersible 2 HP",1900,.7,6],["AC 1.5 ton, inverter type",1200,.95,2],["AC 1.5 ton, fixed speed",1700,.85,6],["AC 2 ton, fixed speed",2200,.85,6],["Air compressor 1 HP",1200,.8,5],["Motor 3 HP three-phase",2800,.8,6],["Motor 5 HP three-phase",4500,.85,6],["Lift or crane 7.5 HP",6500,.85,6],["Custom motor load",750,.75,4]],
+P:[["Geyser",2000,1,1],["Electric iron",1000,1,1],["Electric kettle",1500,1,1],["Microwave oven",1200,.95,1],["Induction cooktop",1800,.95,1],["Room heater",1500,1,1],["Hair dryer",1200,1,1],["Electric oven",2000,1,1],["EV charger",3300,.95,1],["Custom power load",1000,1,1]]};
+var CATN={L:"Light loads",M:"Motor loads",P:"Power loads"},CATD={L:"Lights and electronics",M:"Induction motors, with starting surge",P:"Heating and heavy appliances"};
+var COLL={L:["Light load, total",500,1,6,.9,1,"L"],M:["Motor load, total",1500,1,6,.75,3,"M"],P:["Power load, total",2000,1,2,1,1,"P"]};
+var loads=[["LED bulb",10,4,5,.9,1,"L"],["Wi-Fi router",15,1,24,.9,1,"L"],["TV",100,1,4,.9,1,"L"],["Ceiling fan",75,4,8,.8,2,"M"],["Refrigerator",200,1,10,.7,5,"M"],["Water pump 0.5 HP",550,1,1,.75,4,"M"]];
+var $=function(i){return document.getElementById(i)};
+var F=[["Watts",1],["Qty",2],["Hours",3],["PF",4],["Start ×",5]];
+function rowHtml(l,i){
+ return '<div class="ld"><div class="top"><input aria-label="Load name" value="'+String(l[0]).replace(/"/g,"&quot;")+'" data-i="'+i+'" data-k="0"><button class="x" aria-label="Remove" data-del="'+i+'">✕</button></div><div class="f">'
+ +F.map(function(x){return '<div><label>'+x[0]+'</label><input type="number" min="0" step="any" value="'+l[x[1]]+'" data-i="'+i+'" data-k="'+x[1]+'"></div>'}).join("")+'</div></div>';
 }
-function preset(g, name) {
-  return PRESETS[g].filter(function (p) { return p[0] === name; })[0];
+function rows(){
+ $("rows").innerHTML=["L","M","P"].map(function(c){
+  return '<div class="cat"><div class="ch"><h3>'+CATN[c]+'</h3><span id="sub-'+c+'"></span></div><div class="note" style="margin:0 0 8px">'+CATD[c]+'</div>'
+  +loads.map(function(l,i){return l[6]==c?rowHtml(l,i):""}).join("")
+  +'<div class="ca"><select data-addcat="'+c+'" aria-label="Add single load"><option value="">+ Add single load…</option>'+LIB[c].map(function(p,pi){return '<option value="'+pi+'">'+p[0]+' ('+p[1]+' W)</option>'}).join("")+'</select></div></div>';
+ }).join("")+'';
 }
-function defaultLoads() {
-  return [
-    load("light", preset("light", "LED bulb"), 8, 5),
-    load("light", preset("light", "LED TV"), 1, 4),
-    load("light", preset("light", "Wi-Fi router"), 1, 24),
-    load("light", preset("light", "Laptop"), 2, 6),
-    load("motor", preset("motor", "Ceiling fan"), 4, 8),
-    load("motor", preset("motor", "Refrigerator (single door)"), 1, 10),
-    load("motor", preset("motor", "Water pump 1 HP"), 1, 1)
-  ];
+function n(id){return parseFloat($(id).value)||0}
+function f(x,d){return x.toLocaleString("en-IN",{maximumFractionDigits:d==null?1:d})}
+function tr(a){return a.map(function(r){return "<tr><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>"}).join("")}
+var STD=[1,1.5,2,3,3.5,5,6,8,10,12,15,20,30,50,75,100];
+var lmode="det",TD={L:[500,6,.9],M:[2500,6,.75],P:[2000,2,1]};
+function totalsUI(){
+ function fld(id,lb,v){return '<div><label for="'+id+'">'+lb+'</label><input id="'+id+'" type="number" min="0" step="any" value="'+v+'"></div>'}
+ $("totals").innerHTML=["L","M","P"].map(function(c){var d=TD[c];
+  return '<div class="cat"><div class="ch"><h3>'+CATN[c]+'</h3><span id="tsub-'+c+'"></span></div><div class="note" style="margin:0 0 8px">'+CATD[c]+'</div><div class="f3">'+fld("tW_"+c,"Total watts",d[0])+fld("tH_"+c,"Hours per day",d[1])+fld("tP_"+c,"Power factor",d[2])+'</div>'
+  +(c=="M"?'<div class="f3">'+fld("tL_M","Largest motor (W)",1000)+fld("tS_M","Start ×",5)+'</div>':'')+'</div>'}).join("")
+  +'<div class="note">Enter the total connected watts of each group and the hours they run per day. For motors, give the largest motor and its Start ×. The rest are counted as running only.</div>';
 }
-function defaultTotals() {
-  return { light: { w: 400, h: 6, pf: 0.9 }, motor: { w: 1500, h: 6, pf: 0.8, bw: 1000, bst: 6 }, power: { w: 0, h: 1, pf: 1 } };
+function getLoads(){
+ if(lmode!="tot")return loads;
+ var r=[];
+ ["L","M","P"].forEach(function(c){var w=n("tW_"+c),h=n("tH_"+c),pf=n("tP_"+c)||1;if(w<=0)return;
+  if(c=="M"){var big=Math.min(n("tL_M"),w),s=Math.max(n("tS_M"),1);
+   if(big>0)r.push(["Largest motor",big,1,h,pf,s,c]);
+   if(w-big>0)r.push(["Other motors",w-big,1,h,pf,1,c]);
+  }else r.push([CATN[c],w,1,h,pf,1,c]);});
+ return r;
 }
-var state = { mode: "each", loads: defaultLoads(), totals: defaultTotals() };
+function calc(){
+ var L=getLoads();
+ var hp=n("hp"),he=n("he")/100,hf=n("hf");
+ if(!(he&&hf))$("hpout").textContent="";
+ if(he&&hf){var w=hp*746/he;$("hpout").textContent=f(w,0)+" W input, "+f(w/hf/1000,2)+" kVA running. Use as the Watts value."}
+ var runW=0,runVA=0,wh=0,extraMax=0,extraAll=0;
+ L.forEach(function(l){var w=+l[1]||0,q=+l[2]||0,h=+l[3]||0,pf=+l[4]||1,s=Math.max(+l[5]||1,1);
+  if(pf>1)pf=1;var va=w/pf,ex=va*(s-1);
+  runW+=w*q;runVA+=va*q;wh+=w*q*h;extraAll+=ex*q;if(q>0&&ex>extraMax)extraMax=ex});
+ var sub={L:[0,0],M:[0,0],P:[0,0]};
+ L.forEach(function(l){var c=sub[l[6]];if(!c)return;var x=(+l[1]||0)*(+l[2]||0);c[0]+=x;c[1]+=x*(+l[3]||0)});
+ ["L","M","P"].forEach(function(c){var t=f(sub[c][0]/1000,2)+" kW · "+f(sub[c][1]/1000,2)+" kWh/day";["sub-","tsub-"].forEach(function(k){var e=$(k+c);if(e)e.textContent=t})});
+ var days=n("days"),V=n("volt"),dod=n("dod")/100,ie=n("inv")/100,be=n("bat")/100,mar=n("mar")/100,unit=n("unit"),psh=n("psh"),cc=n("cc"),pc=n("pc"),sc=n("sc"),dp=n("dayp")/100,pw=n("pw"),pr=n("pr")/100,rd=n("rd"),chc=n("chc");
+ if(!(dod&&ie&&be&&unit&&V&&psh&&cc&&pc&&sc&&pw&&pr&&rd&&chc)){clearOut();return}
+ var peakVA=runVA+($("mode").value=="all"?extraAll:extraMax);
+ var dcWh=wh*days/ie,nomWh=dcWh/(dod*be)*(1+mar);
+ var runA=runW/(V*ie),peakA=peakVA/(V*ie);
+ var uE=Math.ceil(nomWh/V/unit),uC=Math.ceil(runA/(unit*cc)),uP=Math.ceil(peakA/(unit*pc));
+ var units=Math.max(1,uE,uC,uP),drv=units==uE?"energy":units==uC?"continuous current":"starting surge";
+ var ah=units*unit,bankKwh=ah*V/1000,usable=bankKwh*1000*dod*be/(1+mar),runH=runW?usable*ie/runW:0;
+ var need=Math.max(runVA*1.25,peakVA/sc)/1000,std=STD.filter(function(x){return x>=need})[0]||Math.ceil(need);
 
-var $ = function (i) { return document.getElementById(i); };
-function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-// Load fields: blanks and negatives count as zero, and a blank power factor as 1.
-function num(v) { v = parseFloat(v); return v > 0 ? v : 0; }
-function pfOf(v) { v = parseFloat(v); return v > 0 ? Math.min(Math.max(v, 0.1), 1) : 1; }
-function up(x) { return Math.ceil(x - 1e-9); }
-function f(x, d) { return x.toLocaleString("en-IN", { maximumFractionDigits: d == null ? 1 : d }); }
-function units(n, one, many) { return n + " " + (n === 1 ? one : many); }
-function tr(a) {
-  return a.map(function (r) { return "<tr" + (r[2] ? ' class="' + r[2] + '"' : "") + "><td>" + r[0] + "</td><td>" + r[1] + "</td></tr>"; }).join("");
+ var dayWh=wh*dp,rechE=dcWh/be,rechDay=rechE/rd,solDay=dayWh/ie+rechDay;
+ var kwp=solDay/(psh*pr)/1000,panels=Math.max(1,Math.ceil(kwp*1000/pw)),arr=panels*pw/1000;
+ var genDay=arr*1000*pr*psh,surplus=Math.min(genDay-dayWh/ie,ah*chc*V*psh),rdays=surplus>0?rechE/surplus:Infinity;
+ var chI=arr*1000*pr/V,chMax=ah*chc;
+ $("kwh").textContent=f(bankKwh,1)+" kWh";
+ $("units").textContent=units+" × "+unit+" Ah at "+V+" V in parallel ("+f(nomWh/1000,1)+" kWh needed for energy)";
+ $("bank").innerHTML=Array(units+1).join("<i></i>");
+ $("t0").innerHTML=tr([["Daily backup energy",f(wh/1000,2)+" kWh"],["Running load",f(runW/1000,2)+" kW / "+f(runVA/1000,2)+" kVA"],["Overall power factor",f(runVA?runW/runVA:1,2)],["Peak at motor start",f(peakVA/1000,2)+" kVA"]]);
+ $("t1").innerHTML=tr([["Energy needed",f(nomWh/1000,1)+" kWh"],["Bank capacity",f(ah,0)+" Ah"],["Runtime at full load",f(runH,1)+" h"],["Battery current, running",f(runA,0)+" A ("+f(runA/ah,2)+" C)"],["Battery current, start",f(peakA,0)+" A ("+f(peakA/ah,2)+" C)"]]);
+ $("sBat").textContent=f(bankKwh,1)+" kWh";$("sBatSub").textContent=units+" × "+unit+" Ah at "+V+" V";
+ $("sInv").textContent=std+" kVA";$("sInvSub").textContent="minimum "+f(need,1)+" kVA";
+ $("sPV").textContent=f(arr,2)+" kWp";$("sPVSub").textContent=panels+" × "+pw+" Wp";
+ $("t2").innerHTML=tr([["Running load",f(runVA/1000,2)+" kVA"],["Running load plus 25%",f(runVA*1.25/1000,2)+" kVA"],["Peak start, after surge capacity",f(peakVA/sc/1000,2)+" kVA"],["Inverter needed",f(need,1)+" kVA"],["Standard size to pick",std+" kVA or higher"]]);
+ $("t3").innerHTML=tr([["Daytime load energy",f(dayWh/1000,2)+" kWh/day"],["Battery recharge energy",f(rechE/1000,2)+" kWh"],["Solar array needed",f(arr,2)+" kWp ("+panels+" × "+pw+" Wp)"],["Daily generation",f(genDay/1000,1)+" kWh"],["Roof area (approx.)",f(arr*5,0)+" m²"],["MPPT current at battery voltage",f(arr*1000/V*1.25,0)+" A"],["Hybrid inverter PV input",f(arr/1.2,1)+" kW or more"],["Full recharge time",isFinite(rdays)?f(rdays,1)+" days":"not possible"]]);
+ var sf="";
+ if(chI>chMax)sf+='<div class="flag w">Solar charge current ('+f(chI,0)+' A) is above the battery limit ('+f(chMax,0)+' A). Add battery units or the surplus is wasted.</div>';
+ if(!isFinite(rdays)||rdays>rd*1.05)sf+='<div class="flag w">Full recharge takes longer than the '+rd+' day target. Add panels or batteries, or allow grid or genset assist.</div>';
+ else if(!sf)sf='<div class="flag">Array can refill the battery within the target.</div>';
+ $("sflags").innerHTML=sf;
+ $("flags").innerHTML=runW?'<div class="flag'+(drv=="energy"?'':' w')+'">Bank size is set by '+drv+'.'+(drv=="energy"?'':' Extra units are added to carry the current safely, so use a soft starter, VFD or staggered starting to reduce it.')+'</div>':'<div class="flag w">Add at least one load.</div>';
 }
-function flag(kind, text) { return '<div class="flag ' + kind + '">' + text + "</div>"; }
-// Settings fields: marks the input and records it when outside its min/max.
-function val(id, bad) {
-  var el = $(id), v = parseFloat(el.value);
-  var ok = v >= (parseFloat(el.min) || 0) && !(v > parseFloat(el.max));
-  el.setAttribute("aria-invalid", ok ? "false" : "true");
-  if (!ok) bad.push(id);
-  return v;
+document.addEventListener("input",function(e){var t=e.target;if(t.dataset&&t.dataset.i!==undefined)loads[t.dataset.i][t.dataset.k]=t.dataset.k==="0"?t.value:parseFloat(t.value)||0;calc()});
+document.addEventListener("change",function(e){if(e.target.id=="mode"||e.target.id=="volt")calc()});
+document.addEventListener("change",function(e){var d=e.target.dataset;if(d&&d.addcat){var p=LIB[d.addcat][e.target.value];if(p){loads.push([p[0],p[1],1,4,p[2],p[3],d.addcat]);rows();calc()}}});
+document.addEventListener("click",function(e){var d=e.target.dataset;if(d&&d.reset){$("cf").hidden=false;return}
+ if(e.target.id=="cfn"){$("cf").hidden=true;return}
+ if(e.target.id=="cfy"){$("cf").hidden=true;doReset();return}if(d&&d.lm){lmode=d.lm;$("rows").hidden=lmode=="tot";$("totals").hidden=lmode!="tot";document.querySelectorAll("[data-lm]").forEach(function(b){b.classList.toggle("on",b.dataset.lm==lmode)});calc();return}if(d&&d.coll){loads.push(COLL[d.coll].slice());rows();calc();return}if(d&&d.del!==undefined){loads.splice(+d.del,1);rows();calc()}});
+var RS={bat:["days","volt","unit","dod","bat","mar","cc","pc"],inv:["inv","sc","mode"],sol:["psh","pw","dayp","pr","rd","chc"]},DEF={},DEFL=JSON.stringify(loads);
+Object.keys(RS).forEach(function(k){RS[k].forEach(function(id){DEF[id]=$(id).value})});
+Object.keys(RS).forEach(function(k){RS[k].forEach(function(id){if($(id).tagName=="INPUT")$(id).placeholder=DEF[id]})});
+[["hp",1],["he",75],["hf",0.75]].forEach(function(a){$(a[0]).placeholder=a[1]});
+function doReset(){
+ loads=[];
+ ["hp","he","hf"].forEach(function(id){$(id).value=""});
+ Object.keys(RS).forEach(function(k){RS[k].forEach(function(id){var e=$(id);e.value=e.tagName=="INPUT"?"":DEF[id]})});
+ lmode="det";$("rows").hidden=false;$("totals").hidden=true;
+ document.querySelectorAll("[data-lm]").forEach(function(x){x.classList.toggle("on",x.dataset.lm=="det")});
+ totalsUI();document.querySelectorAll("#totals input").forEach(function(x){x.value=""});
+ rows();calc();
 }
-
-function renderLoads() {
-  $("groups").innerHTML = GROUPS.map(state.mode === "each" ? eachGroup : totalGroup).join("");
-  $("hpAdd").textContent = state.mode === "each" ? "Add to motor loads" : "Use as largest motor";
+function clearOut(){
+ ["sBat","sInv","sPV","kwh"].forEach(function(i){$(i).textContent="–"});
+ ["sBatSub","sInvSub","sPVSub","units"].forEach(function(i){$(i).textContent=""});
+ ["t0","t1","t2","t3","bank","sflags"].forEach(function(i){$(i).innerHTML=""});
+ $("flags").innerHTML='<div class="flag w">Fill in the battery, inverter and solar fields to see results. The grey values show typical settings.</div>';
 }
-function groupHead(G) {
-  return '<div class="grp-head"><h3>' + G[1] + '</h3><span class="tot" id="tot-' + G[0] + '"></span></div>';
-}
-function eachGroup(G) {
-  var g = G[0], rows = "";
-  state.loads.forEach(function (l, i) {
-    if (l.g !== g) return;
-    rows += '<div class="load">'
-      + '<input class="nm" aria-label="Load name" value="' + esc(l.name) + '" data-i="' + i + '" data-k="name">'
-      + '<button type="button" class="x" aria-label="Remove ' + esc(l.name) + '" data-del="' + i + '">✕</button>'
-      + FIELDS.map(function (fl) {
-        return '<label class="f"><span>' + fl[1] + '</span><input type="number" inputmode="decimal" min="0" step="any" value="' + esc(l[fl[0]]) + '" data-i="' + i + '" data-k="' + fl[0] + '"></label>';
-      }).join("")
-      + "</div>";
-  });
-  var opts = PRESETS[g].map(function (p, j) { return '<option value="' + j + '">' + esc(p[0]) + " · " + f(p[1], 0) + " W</option>"; }).join("");
-  return '<div class="grp">' + groupHead(G)
-    + (rows || '<p class="empty">No ' + G[2] + "s added.</p>")
-    + '<select class="pick" data-g="' + g + '" aria-label="Add a ' + G[2] + '"><option value="">+ Add a ' + G[2] + "</option>" + opts
-    + '<option value="custom">Custom ' + G[2] + "</option></select></div>";
-}
-function totalGroup(G) {
-  var g = G[0], t = state.totals[g];
-  return '<div class="grp">' + groupHead(G) + '<div class="set">'
-    + (g === "motor" ? TOTAL_FIELDS.concat(BIG_MOTOR_FIELDS) : TOTAL_FIELDS).map(function (fl) {
-      var id = "t-" + g + "-" + fl[0];
-      return '<div><label for="' + id + '">' + fl[1] + '</label><input id="' + id + '" type="number" inputmode="decimal" min="0" step="any" value="' + esc(t[fl[0]]) + '" data-t="' + g + '" data-k="' + fl[0] + '"></div>';
-    }).join("")
-    + "</div>"
-    + (g === "motor" ? '<p class="hint">Include the largest motor in the total. Only its start adds to the surge; the other motors count as running load.</p>' : "")
-    + "</div>";
-}
-
-// Running W, daily Wh and VA for the active mode, plus the extra kVA drawn while
-// motors start: `one` is the biggest single start, `all` is every motor at once.
-function loadTotals() {
-  var L = { W: 0, Wh: 0, VA: 0, one: 0, all: 0, p3: false, bigOver: false, g: {} };
-  GROUPS.forEach(function (G) { L.g[G[0]] = { W: 0, Wh: 0 }; });
-  function add(g, w, h, pf) {
-    L.W += w; L.Wh += w * h; L.VA += w / pf;
-    L.g[g].W += w; L.g[g].Wh += w * h;
-  }
-  if (state.mode === "each") {
-    state.loads.forEach(function (l) {
-      var q = num(l.q), pf = pfOf(l.pf), st = Math.max(num(l.st), 1), unitVA = num(l.w) / pf;
-      add(l.g, num(l.w) * q, num(l.h), pf);
-      if (q > 0 && st > 1) {
-        L.one = Math.max(L.one, unitVA * (st - 1));
-        L.all += unitVA * q * (st - 1);
-      }
-      if (q > 0 && l.p3) L.p3 = true;
-    });
-  } else {
-    GROUPS.forEach(function (G) { var t = state.totals[G[0]]; add(G[0], num(t.w), num(t.h), pfOf(t.pf)); });
-    var m = state.totals.motor;
-    L.one = L.all = num(m.bw) / pfOf(m.pf) * (Math.max(num(m.bst), 1) - 1);
-    L.bigOver = num(m.bw) > num(m.w);
-  }
-  return L;
-}
-
-function blank() {
-  ["bank", "tBat", "fBat", "tInv", "fInv", "tPv", "fPv"].forEach(function (id) { $(id).innerHTML = ""; });
-  ["sBat", "sInv", "sPv"].forEach(function (id) { $(id).textContent = "–"; $(id + "Sub").textContent = ""; });
-}
-
-function calc() {
-  var L = loadTotals(), bad = [];
-  var s = {
-    days: val("days", bad), V: val("volt", bad), unit: val("unit", bad), dod: val("dod", bad) / 100, be: val("bat", bad) / 100,
-    mar: val("mar", bad) / 100, cc: val("cc", bad), cp: val("cp", bad),
-    ie: val("inv", bad) / 100, surge: val("surge", bad), start: $("start").value,
-    psh: val("psh", bad), wp: val("wp", bad), day: val("day", bad) / 100, pr: val("pr", bad) / 100, rt: val("rt", bad), chg: val("chg", bad)
-  };
-
-  // 1. Loads
-  GROUPS.forEach(function (G) {
-    var t = L.g[G[0]];
-    $("tot-" + G[0]).textContent = f(t.W / 1000, 2) + " kW · " + f(t.Wh / 1000, 2) + " kWh/day";
-  });
-  var allStart = state.mode === "each" && s.start === "all";
-  var peakVA = L.VA + (allStart ? L.all : L.one);
-  var startNote = state.mode === "total" ? "largest motor starting" : allStart ? "all motors together" : "one motor at a time";
-  $("tLoad").innerHTML = tr([
-    ["Daily energy", f(L.Wh / 1000, 2) + " kWh"],
-    ["Running load", f(L.W / 1000, 2) + " kW · " + f(L.VA / 1000, 2) + " kVA"],
-    ["Overall power factor", L.VA ? f(L.W / L.VA, 2) : "–"],
-    ["Peak starting load (" + startNote + ")", f(peakVA / 1000, 2) + " kVA"]
-  ]);
-  var fl = "";
-  if (!L.W) fl += flag("w", "Add at least one load with watts and quantity.");
-  if (L.bigOver) fl += flag("w", "The largest motor is bigger than the motor total. Include it in the total running watts.");
-  $("fLoad").innerHTML = fl;
-  if (!L.W) { blank(); return; }
-  if (bad.length) return;
-
-  // 2. Battery bank: the unit count is whichever of energy, continuous current
-  // and starting current needs the most units.
-  var unitWh = s.unit * s.V;
-  var backupWh = L.Wh * s.days;
-  var nomWh = backupWh / s.ie / (s.dod * s.be) * (1 + s.mar);
-  var iCont = L.W / (s.V * s.ie);
-  var iPeak = peakVA / (s.V * s.ie); // worst case: starting kVA taken as kW
-  var need = { energy: up(nomWh / unitWh), current: up(iCont / (s.unit * s.cc)), surge: up(iPeak / (s.unit * s.cp)) };
-  var n = Math.max(1, need.energy, need.current, need.surge);
-  var setBy = need.energy >= n ? "energy" : need.current >= n ? "current" : "surge";
-  var bankAh = n * s.unit, bankWh = n * unitWh;
-  var usableWh = bankWh * s.dod * s.be / (1 + s.mar);
-  $("bank").innerHTML = Array(n + 1).join("<i></i>");
-  $("tBat").innerHTML = tr([
-    ["Backup energy for " + units(s.days, "day", "days"), f(backupWh / 1000, 2) + " kWh"],
-    ["Battery capacity needed", f(nomWh / 1000, 1) + " kWh · " + f(nomWh / s.V, 0) + " Ah"],
-    ["Units needed for energy", need.energy, setBy === "energy" && "hi"],
-    ["Units needed for continuous current", need.current, setBy === "current" && "hi"],
-    ["Units needed for motor starting", need.surge, setBy === "surge" && "hi"],
-    ["Installed bank", n + " × " + f(s.unit, 0) + " Ah = " + f(bankAh, 0) + " Ah · " + f(bankWh / 1000, 1) + " kWh", "total"],
-    ["Usable energy (end of life)", f(usableWh / 1000, 1) + " kWh"],
-    ["Runtime at full running load", f(usableWh * s.ie / L.W, 1) + " h"],
-    ["Continuous battery current", f(iCont, 0) + " A · " + f(iCont / bankAh, 2) + " C"],
-    ["Peak current at motor start", f(iPeak, 0) + " A · " + f(iPeak / bankAh, 2) + " C"]
-  ]);
-  $("fBat").innerHTML = setBy === "energy"
-    ? flag("g", "Energy sets the bank size: " + units(n, "unit holds", "units hold") + " the backup energy after depth of discharge, losses and the ageing margin.")
-    : setBy === "current"
-      ? flag("w", "Continuous current sets the bank size. " + units(need.energy, "unit", "units") + " would hold the energy, but " + f(iCont, 0) + " A at " + f(s.cc, 2) + " C per unit needs " + n + ". Check the datasheet's continuous rating.")
-      : flag("w", "Motor starting sets the bank size. A soft starter, VFD or staggered starting would bring it down to " + units(Math.max(1, need.energy, need.current), "unit", "units") + ".");
-
-  // 3. Hybrid inverter: the larger of running kVA plus margin, or peak starting
-  // kVA over the inverter's surge capacity, rounded up to a standard size.
-  var contKVA = L.VA / 1000 * INV_MARGIN, surgeKVA = peakVA / 1000 / s.surge;
-  var needKVA = Math.max(contKVA, surgeKVA);
-  var std = STD_KVA.filter(function (k) { return k >= needKVA - 1e-9; })[0];
-  $("tInv").innerHTML = tr([
-    ["Running load", f(L.VA / 1000, 2) + " kVA"],
-    ["Plus 25% continuous margin", f(contKVA, 2) + " kVA", contKVA >= surgeKVA && "hi"],
-    ["Peak starting load", f(peakVA / 1000, 2) + " kVA"],
-    ["Divided by " + f(s.surge) + "× surge capacity", f(surgeKVA, 2) + " kVA", surgeKVA > contKVA && "hi"],
-    ["Minimum inverter size", f(needKVA, 2) + " kVA"],
-    ["Standard size", std ? f(std) + " kVA" : "Above 100 kVA", "total"]
-  ]);
-  fl = contKVA >= surgeKVA
-    ? flag("g", "The running load sets the inverter size.")
-    : flag("w", "Motor starting sets the inverter size. A soft starter or VFD on the largest motor, or staggered starting, would reduce it.");
-  if (!std) fl += flag("w", "No single standard inverter is large enough. Split the load across parallel inverters.");
-  if (L.p3) fl += flag("w", "Three-phase motors need a three-phase hybrid inverter. The kVA here is the total across all three phases.");
-  $("fInv").innerHTML = fl;
-
-  // 4. Solar: cover the daytime load directly and refill the bank from empty
-  // (its DoD window) within the recharge target.
-  var dayWh = L.Wh * s.day, dayDC = dayWh / s.ie;
-  var refillWh = bankWh * s.dod / s.be;
-  var needDC = dayDC + refillWh / s.rt;
-  var perKwp = s.psh * s.pr * 1000; // Wh per kWp per day after all solar losses
-  var kwpNeed = needDC / perKwp;
-  var panels = Math.max(1, up(kwpNeed * 1000 / s.wp)), kwp = panels * s.wp / 1000;
-  var genWh = kwp * perKwp;
-  var iChg = kwp * 1000 * s.pr / s.V, iChgMax = bankAh * s.chg;
-  var surplus = genWh - dayDC, capWh = iChgMax * s.V * s.psh;
-  var perDay = Math.min(surplus, capWh);
-  var rechargeDays = perDay > 0 ? refillWh / perDay : Infinity;
-  $("tPv").innerHTML = tr([
-    ["Daytime load fed by solar", f(dayWh / 1000, 2) + " kWh/day"],
-    ["Battery refill, empty to full", f(refillWh / 1000, 1) + " kWh"],
-    ["Solar energy needed per day", f(needDC / 1000, 1) + " kWh"],
-    ["Array needed", f(kwpNeed, 2) + " kWp"],
-    ["Solar array", panels + " × " + f(s.wp, 0) + " Wp = " + f(kwp, 2) + " kWp", "total"],
-    ["Daily generation", f(genWh / 1000, 1) + " kWh"],
-    ["Panel area", "about " + f(kwp * M2_PER_KWP, 0) + " m²"],
-    ["MPPT charge current (× 1.25)", f(kwp * 1000 / s.V * MPPT_MARGIN, 0) + " A"],
-    ["Hybrid inverter PV input", "at least " + f(kwp / DC_AC_RATIO, 1) + " kW"],
-    ["Peak solar charge current", f(iChg, 0) + " A"],
-    ["Bank's max charge current", f(iChgMax, 0) + " A"],
-    ["Full recharge time", isFinite(rechargeDays) ? units(+rechargeDays.toFixed(2), "day", "days") : "Never"]
-  ]);
-  fl = "";
-  if (iChg > iChgMax) fl += flag("w", "At peak sun the array can push " + f(iChg, 0) + " A into the bank, above the " + f(iChgMax, 0) + " A it accepts at " + f(s.chg, 2) + " C. Set the inverter's maximum charge current to " + f(iChgMax, 0) + " A or add battery units.");
-  if (rechargeDays > s.rt + 1e-6) {
-    fl += flag("w", "A full recharge takes " + (isFinite(rechargeDays) ? f(rechargeDays, 2) + " days" : "forever") + ", longer than the " + units(s.rt, "day", "days") + " target. "
-      + (capWh < surplus ? "The bank's charge limit is the bottleneck, so add battery units or raise the charge rate if the datasheet allows," : "Add panels,")
-      + " or plan for grid or generator charging.");
-  } else {
-    fl += flag("g", "The array refills the bank from empty in " + f(rechargeDays, 2) + " days, within the " + units(s.rt, "day", "days") + " target.");
-  }
-  $("fPv").innerHTML = fl;
-
-  // Pinned summary
-  $("sBat").textContent = f(bankWh / 1000, 1) + " kWh";
-  $("sBatSub").textContent = n + " × " + f(s.unit, 0) + " Ah · " + f(s.V) + " V";
-  $("sInv").textContent = std ? f(std) + " kVA" : "> 100 kVA";
-  $("sInvSub").textContent = "min " + f(needKVA, 2) + " kVA";
-  $("sPv").textContent = f(kwp, 2) + " kWp";
-  $("sPvSub").textContent = panels + " × " + f(s.wp, 0) + " Wp";
-}
-
-// HP to watts: input power = HP × 746 / motor efficiency.
-function helper() {
-  var bad = [], hp = val("hp", bad), eff = val("hpEff", bad) / 100, pf = val("hpPf", bad);
-  if (bad.length) return null;
-  var w = hp * W_PER_HP / eff;
-  $("tHp").innerHTML = tr([["Input power", f(w, 0) + " W"], ["Apparent power", f(w / pf / 1000, 2) + " kVA"]]);
-  return { hp: hp, w: Math.round(w), pf: pf };
-}
-
-document.addEventListener("input", function (e) {
-  var d = e.target.dataset || {};
-  if (d.i !== undefined) state.loads[d.i][d.k] = e.target.value;
-  else if (d.t !== undefined) state.totals[d.t][d.k] = e.target.value;
-  helper();
-  calc();
-});
-document.addEventListener("change", function (e) {
-  var t = e.target;
-  if (t.name === "mode") {
-    state.mode = t.value;
-    renderLoads(); calc();
-  } else if (t.classList.contains("pick") && t.value) {
-    var g = t.dataset.g, custom = t.value === "custom";
-    state.loads.push(load(g, custom ? CUSTOM[g] : PRESETS[g][+t.value], 1));
-    renderLoads(); calc();
-    if (custom) { var nm = document.querySelector('[data-i="' + (state.loads.length - 1) + '"][data-k="name"]'); nm.focus(); nm.select(); }
-  }
-});
-document.addEventListener("click", function (e) {
-  var d = e.target.dataset;
-  if (d && d.del !== undefined) { state.loads.splice(+d.del, 1); renderLoads(); calc(); }
-});
-document.addEventListener("submit", function (e) { e.preventDefault(); });
-document.addEventListener("reset", function (e) {
-  var form = e.target;
-  if (form.id === "loads") {
-    if (!confirm("Reset all loads to the starting list?")) { e.preventDefault(); return; }
-    state.loads = defaultLoads();
-    state.totals = defaultTotals();
-  }
-  // The browser restores the default values after this event, so recalculate on the next tick.
-  setTimeout(function () {
-    if (form.id === "loads") {
-      document.querySelector('input[name="mode"][value="' + state.mode + '"]').checked = true;
-      renderLoads(); helper();
-    }
-    calc();
-  }, 0);
-});
-$("hpAdd").onclick = function () {
-  var h = helper();
-  if (!h) return;
-  if (state.mode === "each") state.loads.push({ g: "motor", name: f(h.hp, 2) + " HP motor", w: h.w, q: 1, h: 1, pf: h.pf, st: 6, p3: false });
-  else state.totals.motor.bw = h.w;
-  renderLoads(); calc();
-};
-renderLoads(); helper(); calc();
-
+totalsUI();rows();calc();
 </script>
 </body>
 </html>
